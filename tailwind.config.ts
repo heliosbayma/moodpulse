@@ -8,11 +8,11 @@ const config: Config = {
   ],
   theme: {
     colors: {
-      'text-primary': 'var(--color-text-primary)',
-      'background-primary': 'var(--color-background-primary)',
       primary: 'var(--color-primary)',
       secondary: 'var(--color-secondary)',
       accent: 'var(--color-accent)',
+      'text-primary': 'var(--color-text-primary)',
+      'background-primary': 'var(--color-background-primary)',
     },
 
     extend: {
