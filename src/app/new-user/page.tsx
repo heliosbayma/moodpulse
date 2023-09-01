@@ -24,7 +24,7 @@ async function createNewUser() {
   redirect('/journal')
 }
 
-const NewUser = () => {
+const NewUserPage = () => {
   createNewUser()
 
   return (
@@ -34,4 +34,4 @@ const NewUser = () => {
   )
 }
 
-export default NewUser
+export default NewUserPage
