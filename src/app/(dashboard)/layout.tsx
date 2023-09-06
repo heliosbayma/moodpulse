@@ -1,3 +1,4 @@
+import { UserButton } from '@clerk/nextjs'
 import { FC, ReactNode } from 'react'
 
 type DashboardLayoutProps = {
@@ -7,7 +8,11 @@ type DashboardLayoutProps = {
 const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
   return (
     <main className="relative h-screen w-screen">
-      <header className="border-black/10 h-[60px] border-b">header</header>
+      <header className="border-black/10 h-[60px] border-b">
+        <div className="flex h-full w-full  items-center justify-end px-6">
+          <UserButton />
+        </div>
+      </header>
       <article>{children}</article>
     </main>
   )
