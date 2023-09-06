@@ -5,7 +5,12 @@ type DashboardLayoutProps = {
 }
 
 const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
-  return <section>{children}</section>
+  return (
+    <main className="relative h-screen w-screen">
+      <header className="border-black/10 h-[60px] border-b">header</header>
+      <article>{children}</article>
+    </main>
+  )
 }
 
 export default DashboardLayout
