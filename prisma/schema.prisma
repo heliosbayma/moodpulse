@@ -15,10 +15,10 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  clerkId         String           @unique
-  email           String           @unique
-  JournalEntries  JournalEntry[]
-  EmotionalStates EmotionalState[]
+  clerkId        String         @unique
+  email          String         @unique
+  journalEntries JournalEntry[]
+  moodBoard      MoodEntry[]
 }
 
 model JournalEntry {
@@ -30,12 +30,12 @@ model JournalEntry {
   User   User   @relation(fields: [userId], references: [id])
 
   content  String    @db.Text
-  Analysis Analysis?
+  analysis Analysis?
 
   @@unique([userId])
 }
 
-enum EmotionalStateType {
+enum MoodTypes {
   great
   well
   meh
@@ -43,7 +43,7 @@ enum EmotionalStateType {
   horrible
 }
 
-model EmotionalState {
+model MoodEntry {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -51,8 +51,8 @@ model EmotionalState {
   userId String
   user   User   @relation(fields: [userId], references: [id])
 
-  date           DateTime
-  EmotionalState EmotionalStateType
+  date DateTime
+  mood MoodTypes
 }
 
 model Analysis {
