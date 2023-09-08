@@ -2,6 +2,7 @@ import getUserByClerkId from '@/utils/auth'
 import JournalEntryCard from '@/components/JournalEntryCard'
 import prisma from '@/utils/db'
 import { JournalEntry, MoodEntry } from '@prisma/client'
+import NewJournalEntryButton from '@/components/NewJournalEntryButton'
 
 const getEntries = async () => {
   const user = await getUserByClerkId()
@@ -38,9 +39,7 @@ const JournalPage = async () => {
     <>
       <section>moodboard</section>
       <h2 className="mb-8 text-3xl">journal</h2>
-      <button className="rounded-xl bg-accent px-4 py-1 text-text-primary">
-        New entry
-      </button>
+      <NewJournalEntryButton />
       <section className="grid grid-cols-3 gap-4">
         {journalEntries.map((entry) => (
           <JournalEntryCard key={entry.id} journalEntry={entry} />
