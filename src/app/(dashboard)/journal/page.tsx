@@ -1,5 +1,7 @@
-import prisma from '@/utils/db'
 import getUserByClerkId from '@/utils/auth'
+import JournalEntryCard from '@/components/JournalEntryCard'
+import prisma from '@/utils/db'
+import { JournalEntry, MoodEntry } from '@prisma/client'
 
 const getEntries = async () => {
   const user = await getUserByClerkId()
@@ -29,12 +31,21 @@ const getEntries = async () => {
 
 const JournalPage = async () => {
   const entries = await getEntries()
-  console.log('moodboard', entries.moodEntries)
-  console.log('entries', entries.journalEntries)
+  const journalEntries: JournalEntry[] = entries.journalEntries
+  const moodEntries: MoodEntry[] = entries.moodEntries
+
   return (
     <>
       <section>moodboard</section>
-      <section>journal</section>
+      <h2 className="mb-8 text-3xl">journal</h2>
+      <button className="rounded-xl bg-accent px-4 py-1 text-text-primary">
+        New entry
+      </button>
+      <section className="grid grid-cols-3 gap-4">
+        {journalEntries.map((entry) => (
+          <JournalEntryCard key={entry.id} journalEntry={entry} />
+        ))}
+      </section>
     </>
   )
 }
