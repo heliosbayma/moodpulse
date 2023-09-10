@@ -4,13 +4,15 @@ const createURL = (path: string) => {
 
 export const createNewEntry = async () => {
   const res = await fetch(
-    new Request(createURL('/api/journal'), {
+    new Request(createURL('/api/entry'), {
       method: 'POST',
+      body: JSON.stringify({ content: 'new entry' }),
     }),
   )
 
   if (res.ok) {
-    const data = await res.json()
-    return data.data
+    return res.json()
+  } else {
+    throw new Error('Something went wrong on API server!')
   }
 }
