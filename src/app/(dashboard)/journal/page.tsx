@@ -1,11 +1,15 @@
 import getUserByClerkId from '@/utils/auth'
 import JournalEntryCard from '@/components/JournalEntryCard'
 import prisma from '@/utils/db'
-import { JournalEntry, MoodEntry } from '@prisma/client'
+import { JournalEntry, MoodEntry, User } from '@prisma/client'
 import NewJournalEntryButton from '@/components/NewJournalEntryButton'
+import { redirect } from 'next/navigation'
 
 const getEntries = async () => {
-  const user = await getUserByClerkId()
+  const user: User | null | undefined = await getUserByClerkId()
+
+  if (!user) redirect('/')
+
   const today = new Date()
   const thirtyDaysAgo = new Date(today.setDate(today.getDate() - 30))
 
