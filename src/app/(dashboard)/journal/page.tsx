@@ -41,10 +41,10 @@ const JournalPage = async () => {
 
   return (
     <>
-      <section>moodboard</section>
-      <h2 className="mb-8 text-3xl">journal</h2>
+      <h2 className="mb-2 mr-8 text-3xl">Moodboard</h2>
+      <h2 className="mb-2 mr-8 text-3xl">Journal</h2>
       <NewJournalEntryButton />
-      <section className="grid grid-cols-3 gap-4">
+      <section className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
         {journalEntries.map((entry) => (
           <JournalEntryCard key={entry.id} journalEntry={entry} />
         ))}

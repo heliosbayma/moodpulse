@@ -13,10 +13,12 @@ const NewJournalEntryButton = () => {
 
   return (
     <button
-      className="rounded-xl bg-accent px-4 py-1 text-text-primary"
+      className="w-full rounded-full bg-accent px-4 py-1 text-sm font-medium uppercase text-text-primary
+      ring-accent transition duration-300 ease-in-out
+      hover:bg-secondary hover:ring-4 focus:bg-secondary focus:ring-4 active:bg-secondary active:ring-4 sm:w-fit"
       onClick={handleNewJournalEntryClick}
     >
-      New Journal Entry
+      New entry
     </button>
   )
 }
