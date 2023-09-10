@@ -7,6 +7,8 @@ import { NextResponse } from 'next/server'
 export const POST = async () => {
   const user: User | null | undefined = await getUserByClerkId()
 
+  //  temporary redirect to home page if user doesn't exist
+  //  if user is here, it exists in clerk db but not in prisma db
   if (!user) redirect('/')
 
   const entry = await prisma.journalEntry.create({
