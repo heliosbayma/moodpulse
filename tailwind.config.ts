@@ -15,7 +15,11 @@ const config: Config = {
         'text-primary': 'var(--color-text-primary)',
         'background-primary': 'var(--color-background-primary)',
       },
-
+      screens: {
+        fhd: '1920px',
+        '2k': '2560px',
+        '4k': '3840px',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
