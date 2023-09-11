@@ -32,7 +32,7 @@ model JournalEntry {
   content  String    @db.Text
   analysis Analysis?
 
-  @@index([userId, id])
+  @@unique([userId, id])
 }
 
 enum MoodTypes {
