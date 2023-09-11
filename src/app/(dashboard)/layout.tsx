@@ -13,7 +13,7 @@ const DashboardLayout: FC<DashboardLayoutProps> = ({ children }) => {
           <UserButton />
         </div>
       </header>
-      <article className="max-w-screen-2k m-auto flex flex-col p-10">
+      <article className="max-w-screen-2k m-auto flex flex-col px-4 py-10 md:px-10">
         {children}
       </article>
     </main>
