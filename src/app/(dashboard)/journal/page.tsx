@@ -44,7 +44,7 @@ const JournalPage = async () => {
       <h2 className="mb-2 mr-8 text-3xl">Moodboard</h2>
       <h2 className="mb-2 mr-8 text-3xl">Journal</h2>
       <NewJournalEntryButton />
-      <section className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <section className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3 2xl:grid-cols-4">
         {journalEntries.map((entry) => (
           <JournalEntryCard key={entry.id} journalEntry={entry} />
         ))}
