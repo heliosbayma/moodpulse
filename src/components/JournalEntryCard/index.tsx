@@ -1,5 +1,6 @@
 import { JournalEntry } from '@prisma/client'
 import { FC } from 'react'
+import CardButton from '@/components/CardButton'
 
 type JournalEntryCardProps = {
   journalEntry: JournalEntry
@@ -21,12 +22,16 @@ const JournalEntryCard: FC<JournalEntryCardProps> = ({ journalEntry }) => {
       </h3>
       <p className="mt-1">{journalEntry.content}</p>
       <div className="mt-4 flex justify-between">
-        <button className="w-fit rounded bg-secondary px-3 py-1 text-xs uppercase text-text-primary transition duration-300 ease-in-out hover:bg-accent hover:bg-secondary focus:bg-accent focus:bg-secondary active:bg-accent active:bg-secondary sm:w-fit">
-          Open
-        </button>
-        <button className="text-gray-400 hover:text-red-600 focus:text-red-600text-red-600 active:text-red-600 w-fit rounded-sm px-3 py-1 text-xs uppercase transition duration-300 ease-in-out">
-          Delete
-        </button>
+        <CardButton
+          label="Open"
+          id={journalEntry.id}
+          className="w-fit rounded bg-secondary px-3 py-1 text-xs uppercase text-text-primary transition duration-300 ease-in-out hover:bg-accent focus:bg-accent active:bg-accent sm:w-fit"
+        />
+        <CardButton
+          label="Delete"
+          id={journalEntry.id}
+          className="text-gray-400 hover:text-red-600 focus:text-red-600text-red-600 active:text-red-600 w-fit rounded-sm px-3 py-1 text-xs uppercase transition duration-300 ease-in-out"
+        />
       </div>
     </article>
   )
