@@ -1,8 +1,21 @@
+interface EntryData {
+  id: string
+  title: string
+  content: string
+}
+
+interface EntryResponse {
+  error: boolean
+  code: number
+  message: string
+  data?: EntryData
+}
+
 const createURL = (path: string) => {
   return window.location.origin + path
 }
 
-export const createNewEntry = async () => {
+export const createNewEntry = async (): Promise<EntryResponse> => {
   try {
     const res = await fetch(
       new Request(createURL('/api/entry'), {
@@ -12,7 +25,14 @@ export const createNewEntry = async () => {
     )
 
     if (res.ok) {
-      return { error: false, code: res.status, message: res.json() }
+      const data = await res.json()
+
+      return {
+        error: false,
+        code: res.status,
+        message: res.statusText,
+        data: data.data,
+      }
     } else {
       return { error: true, code: res.status, message: res.statusText }
     }
@@ -22,7 +42,11 @@ export const createNewEntry = async () => {
   }
 }
 
-export const updateEntry = async (id: string, content: string) => {
+export const updateEntry = async (
+  id: string,
+  title: string,
+  content: string,
+): Promise<EntryResponse> => {
   try {
     const res = await fetch(
       new Request(createURL(`/api/entry/${id}`), {
@@ -32,7 +56,13 @@ export const updateEntry = async (id: string, content: string) => {
     )
 
     if (res.ok) {
-      return { error: false, code: res.status, message: res.json() }
+      const data = await res.json()
+      return {
+        error: false,
+        code: res.status,
+        message: res.statusText,
+        data: data.data,
+      }
     } else {
       return { error: true, code: res.status, message: res.statusText }
     }

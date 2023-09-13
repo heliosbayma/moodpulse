@@ -12,7 +12,7 @@ const NewJournalEntryButton = () => {
 
   const handleNewJournalEntryClick = async () => {
     const data = await createNewEntry()
-    router.push(`/journal/${data.id}`)
+    router.push(`/journal/${data.data?.id}`)
   }
 
   return (
