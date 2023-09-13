@@ -7,7 +7,7 @@ export const PATCH = async (
   request: Request,
   { params }: { params: { id: string } },
 ) => {
-  const { content } = await request.json()
+  const { title, content } = await request.json()
 
   const user: User | null | undefined = await getUserByClerkId()
   if (!user) throw new Error('User not found')
@@ -20,6 +20,7 @@ export const PATCH = async (
       },
     },
     data: {
+      title,
       content,
     },
   })

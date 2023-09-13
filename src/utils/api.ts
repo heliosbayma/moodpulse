@@ -51,7 +51,7 @@ export const updateEntry = async (
     const res = await fetch(
       new Request(createURL(`/api/entry/${id}`), {
         method: 'PATCH',
-        body: JSON.stringify({ content }),
+        body: JSON.stringify({ title, content }),
       }),
     )
 
