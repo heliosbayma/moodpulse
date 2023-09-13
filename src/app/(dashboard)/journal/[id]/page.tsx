@@ -29,7 +29,7 @@ const getEntry = async (id: string) => {
 
   const entry: JournalEntry | null = await prisma.journalEntry.findUnique({
     where: {
-      userId_id: {
+      unique_journal_entry: {
         userId: user.id,
         id,
       },
