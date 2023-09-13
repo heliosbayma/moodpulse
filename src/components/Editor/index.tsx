@@ -54,8 +54,8 @@ const Editor: FC<EditorProps> = ({ entry }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const [title, setTitle] = useState<string>(entry?.title ?? '')
   const [content, setContent] = useState<string>(entry?.content ?? '')
-  const debouncedTitle = useDebounce<string>(title, 2000)
-  const debouncedContent = useDebounce<string>(content, 2000)
+  const debouncedTitle = useDebounce<string>(title, 1000)
+  const debouncedContent = useDebounce<string>(content, 1000)
 
   const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: 'SET_STATUS', payload: 'idle' })
