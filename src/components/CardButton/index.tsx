@@ -1,5 +1,6 @@
 'use client'
 
+import { deleteEntry } from '@/utils/api'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context'
 import { useRouter } from 'next/navigation'
 import { FC } from 'react'
@@ -42,5 +43,5 @@ const handleOpen = (id: string, router: AppRouterInstance) => {
 }
 
 const handleDelete = (id: string) => {
-  console.log('delete', id)
+  deleteEntry(id)
 }

@@ -71,3 +71,28 @@ export const updateEntry = async (
     return { error: true, code: 500, message: 'Internal Server Error' }
   }
 }
+
+export const deleteEntry = async (id: string): Promise<EntryResponse> => {
+  try {
+    const res = await fetch(
+      new Request(createURL(`/api/entry/${id}`), {
+        method: 'DELETE',
+      }),
+    )
+
+    if (res.ok) {
+      const data = await res.json()
+      return {
+        error: false,
+        code: res.status,
+        message: res.statusText,
+        data: data.data,
+      }
+    } else {
+      return { error: true, code: res.status, message: res.statusText }
+    }
+  } catch (error) {
+    console.error(error)
+    return { error: true, code: 500, message: 'Internal Server Error' }
+  }
+}

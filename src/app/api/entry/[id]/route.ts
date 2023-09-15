@@ -27,3 +27,22 @@ export const PATCH = async (
 
   return NextResponse.json({ data: { updatedEntry } })
 }
+
+export const DELETE = async (
+  request: Request,
+  { params }: { params: { id: string } },
+) => {
+  const user: User | null | undefined = await getUserByClerkId()
+  if (!user) throw new Error('User not found')
+
+  const deletedEntry: JournalEntry = await prisma.journalEntry.delete({
+    where: {
+      unique_journal_entry: {
+        userId: user.id,
+        id: params.id,
+      },
+    },
+  })
+
+  return NextResponse.json({ data: { deletedEntry } })
+}
