@@ -19,5 +19,9 @@ export const POST = async () => {
     },
   })
 
+  // Next.js will soon have a way to revalidate data which doesn't use fetch api
+  // right now it only works on it's canary version
+  // revalidatePath('/journal')
+
   return NextResponse.json({ data: entry })
 }
