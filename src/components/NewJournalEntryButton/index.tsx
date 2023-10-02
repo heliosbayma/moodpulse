@@ -3,7 +3,7 @@
 import { createNewEntry } from '@/utils/api'
 import { useRouter } from 'next/navigation'
 import { FC } from 'react'
-import { useWindowSize } from 'usehooks-ts'
+import { useWindowSize } from '@/hooks/useWindowSize'
 import FixedBottomBar from '@/components/FixedBottomBar'
 
 const NewJournalEntryButton = () => {
