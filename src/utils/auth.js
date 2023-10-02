@@ -1,7 +1,7 @@
 import { auth } from '@clerk/nextjs'
 import prisma from './db'
 
-const getUserByClerkId = async (select = { id: true }) => {
+export const getUserByClerkId = async (select = { id: true }) => {
   const { userId } = await auth()
 
   const user = await prisma.user
@@ -17,5 +17,3 @@ const getUserByClerkId = async (select = { id: true }) => {
 
   return user
 }
-
-export default getUserByClerkId
