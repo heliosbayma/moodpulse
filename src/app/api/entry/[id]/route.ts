@@ -1,4 +1,5 @@
-import getUserByClerkId from '@/utils/auth'
+import { getUserByClerkId } from '@/utils/auth'
+import { update } from '@/utils/actions'
 import prisma from '@/utils/db'
 import { JournalEntry, User } from '@prisma/client'
 import { NextResponse } from 'next/server'
@@ -25,6 +26,8 @@ export const PATCH = async (
     },
   })
 
+  update(['/journal'])
+
   return NextResponse.json({ data: { updatedEntry } })
 }
 
@@ -43,6 +46,8 @@ export const DELETE = async (
       },
     },
   })
+
+  update(['/journal'])
 
   return NextResponse.json({ data: { deletedEntry } })
 }

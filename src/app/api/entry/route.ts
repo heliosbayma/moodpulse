@@ -1,4 +1,5 @@
-import getUserByClerkId from '@/utils/auth'
+import { update } from '@/utils/actions'
+import { getUserByClerkId } from '@/utils/auth'
 import prisma from '@/utils/db'
 import { User } from '@prisma/client'
 import { redirect } from 'next/navigation'
@@ -19,9 +20,7 @@ export const POST = async () => {
     },
   })
 
-  // Next.js will soon have a way to revalidate data which doesn't use fetch api
-  // right now it only works on it's canary version
-  // revalidatePath('/journal')
+  update(['/journal'])
 
   return NextResponse.json({ data: entry })
 }
