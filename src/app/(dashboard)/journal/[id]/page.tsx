@@ -1,5 +1,5 @@
 import Editor from '@/components/Editor'
-import getUserByClerkId from '@/utils/auth'
+import { getUserByClerkId } from '@/utils/auth'
 import prisma from '@/utils/db'
 import { JournalEntry } from '@prisma/client'
 import Link from 'next/link'
@@ -15,11 +15,11 @@ const JournalEntryPage: FC<Params> = async ({ params }) => {
   const entry = await getEntry(params.id)
 
   return (
-    <div>
+    <>
       <Link href="/journal">Back</Link>
       <h1>JournalEntryPage</h1>
       <Editor entry={entry} />
-    </div>
+    </>
   )
 }
 
