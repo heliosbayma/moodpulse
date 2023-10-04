@@ -1,4 +1,6 @@
 Temporarily named MoodPulse, built with Next.js
+This project is a first one using Next.js App Router, as on my previous jobs I was using version 12 or earlier ones.
+The goal is to learn the new version and some of it's features which are not yet stable.
 
 ## What it is
 
