@@ -1,9 +1,10 @@
 'use client'
 
-import { updateEntry } from '@/utils/api'
+import { useTransition } from 'react'
 import { JournalEntry } from '@prisma/client'
 import { ChangeEvent, FC, useEffect, useReducer, useState } from 'react'
 import { useDebounce } from 'usehooks-ts'
+import { updateEntry } from '@/utils/actions'
 
 interface State {
   status: 'idle' | 'loading' | 'error' | 'success'
@@ -48,14 +49,16 @@ const reducer = (state: State, action: Action): State => {
 
 interface EditorProps {
   entry: JournalEntry | null
+  userId: string
 }
 
-const Editor: FC<EditorProps> = ({ entry }) => {
+const Editor: FC<EditorProps> = ({ entry, userId }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const [title, setTitle] = useState<string>(entry?.title ?? '')
   const [content, setContent] = useState<string>(entry?.content ?? '')
   const debouncedTitle = useDebounce<string>(title, 1000)
   const debouncedContent = useDebounce<string>(content, 1000)
+  const [isPending, startTransition] = useTransition()
 
   const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: 'SET_STATUS', payload: 'idle' })
@@ -71,15 +74,17 @@ const Editor: FC<EditorProps> = ({ entry }) => {
     if (!entry) return
 
     dispatch({ type: 'SET_STATUS', payload: 'loading' })
-    updateEntry(entry.id, debouncedTitle, debouncedContent)
-      .then((res) => {
-        dispatch({ type: 'SET_STATUS', payload: 'success' })
-      })
-      .catch((error) => {
-        console.error(error)
-        dispatch({ type: 'SET_STATUS', payload: 'error' })
-      })
-  }, [debouncedTitle, debouncedContent, entry])
+    startTransition(() =>
+      updateEntry(userId, entry.id, debouncedTitle, debouncedContent)
+        .then((res) => {
+          dispatch({ type: 'SET_STATUS', payload: 'success' })
+        })
+        .catch((error) => {
+          console.error(error)
+          dispatch({ type: 'SET_STATUS', payload: 'error' })
+        }),
+    )
+  }, [debouncedTitle, debouncedContent])
 
   if (!entry) return <h1>Sorry, entry not available</h1>
 

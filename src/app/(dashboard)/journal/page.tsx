@@ -6,7 +6,11 @@ import NewJournalEntryButton from '@/components/NewJournalEntryButton'
 import { redirect } from 'next/navigation'
 
 const JournalPage = async () => {
-  const entries = await getEntries()
+  const user: User | null | undefined = await getUserByClerkId()
+  if (!user) redirect('/')
+
+  const userId = user.id
+  const entries = await getEntries(userId)
   const journalEntries: JournalEntry[] = entries.journalEntries
   const moodEntries: MoodEntry[] = entries.moodEntries
 
@@ -23,10 +27,14 @@ const JournalPage = async () => {
         </>
       )}
       <h2 className="mb-2 mr-8 text-3xl">Journal</h2>
-      <NewJournalEntryButton />
+      <NewJournalEntryButton userId={userId} />
       <section className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3 2xl:grid-cols-4">
         {journalEntries.map((entry) => (
-          <JournalEntryCard key={entry.id} journalEntry={entry} />
+          <JournalEntryCard
+            key={entry.id}
+            journalEntry={entry}
+            userId={userId}
+          />
         ))}
       </section>
     </>
@@ -35,17 +43,13 @@ const JournalPage = async () => {
 
 export default JournalPage
 
-const getEntries = async () => {
-  const user: User | null | undefined = await getUserByClerkId()
-
-  if (!user) redirect('/')
-
+const getEntries = async (id: string) => {
   const today = new Date()
   const thirtyDaysAgo = new Date(today.setDate(today.getDate() - 30))
 
   const moodEntries = await prisma.moodEntry.findMany({
     where: {
-      userId: user.id,
+      userId: id,
       createdAt: {
         gte: thirtyDaysAgo,
       },
@@ -54,7 +58,7 @@ const getEntries = async () => {
 
   const journalEntries = await prisma.journalEntry.findMany({
     where: {
-      userId: user.id,
+      userId: id,
     },
     orderBy: {
       createdAt: 'desc',

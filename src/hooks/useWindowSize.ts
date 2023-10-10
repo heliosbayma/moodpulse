@@ -9,8 +9,8 @@ interface WindowSize {
 
 export function useWindowSize(): WindowSize {
   const [windowSize, setWindowSize] = useState<WindowSize>({
-    width: window ? window.innerWidth : 0,
-    height: window ? window.innerHeight : 0,
+    width: 0,
+    height: 0,
   })
 
   const handleSize = () => {
