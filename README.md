@@ -2,6 +2,10 @@ Temporarily named MoodPulse, built with Next.js
 This project is a first one using Next.js App Router, as on my previous jobs I was using version 12 or earlier ones.
 The goal is to learn the new version and some of it's features which are not yet stable.
 
+## Updates
+Tue 10 Oct
+- After dealing with client side caching problems with Next App router, I've migrated to server actions which solved the caching problems.
+
 ## What it is
 
 Version 0.0.1 of a personal web project, a very simple test version
