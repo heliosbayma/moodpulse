@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,6 +5,14 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+enum MoodType {
+  great
+  well
+  meh
+  bad
+  horrible
 }
 
 model User {
@@ -18,7 +23,6 @@ model User {
   clerkId        String         @unique
   email          String         @unique
   journalEntries JournalEntry[]
-  moodBoard      MoodEntry[]
 }
 
 model JournalEntry {
@@ -28,45 +32,9 @@ model JournalEntry {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  title    String
-  content  String    @db.Text
-  analysis Analysis?
+  title   String
+  content String   @db.Text
+  mood    MoodType @default(great)
 
   @@unique(fields: [userId, id], name: "unique_journal_entry")
-}
-
-enum MoodTypes {
-  great
-  well
-  meh
-  bad
-  horrible
-}
-
-model MoodEntry {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-
-  date DateTime
-  mood MoodTypes
-}
-
-model Analysis {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  journalEntryId String
-  JournalEntry   JournalEntry @relation(fields: [journalEntryId], references: [id])
-
-  mood     String
-  summary  String  @db.Text
-  color    String
-  negative Boolean
-
-  @@unique([journalEntryId])
 }
