@@ -19,7 +19,7 @@ const MoodPicker = ({ initialMood, onMoodChange }: MoodPickerProps) => {
     <select value={mood} onChange={handleMoodChange}>
       <option value="great">Great</option>
       <option value="well">Well</option>
-      <option value="meh">Meh</option>
+      <option value="ok">Ok</option>
       <option value="bad">Bad</option>
       <option value="horrible">Horrible</option>
     </select>
