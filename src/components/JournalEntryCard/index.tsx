@@ -21,6 +21,9 @@ const JournalEntryCard: FC<JournalEntryCardProps> = ({
       <time className="py-1 text-xs font-semibold uppercase tracking-wide text-gray-300">
         {date}
       </time>
+      <p className="py-1 text-xs font-semibold uppercase tracking-wide text-gray-500">
+        Mood: {journalEntry.mood}
+      </p>
       <h3 className="truncate text-lg font-semibold leading-tight">
         {journalEntry.title}
       </h3>
