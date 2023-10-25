@@ -19,10 +19,12 @@ const JournalEntryPage: FC<Params> = async ({ params }) => {
   const userId = user.id
   const entry = await getEntry(params.id)
 
+  if (!entry) redirect('/journal')
+
   return (
     <>
       <Link href="/journal">Back</Link>
-      <h1>JournalEntryPage</h1>
+      <h1>Journal Entry Page</h1>
       <Editor entry={entry} userId={userId} />
     </>
   )
