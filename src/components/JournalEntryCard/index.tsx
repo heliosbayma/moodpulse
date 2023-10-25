@@ -27,8 +27,8 @@ const JournalEntryCard: FC<JournalEntryCardProps> = ({
       <h3 className="truncate text-lg font-semibold leading-tight">
         {journalEntry.title}
       </h3>
-      <p className="mt-1">{journalEntry.content}</p>
-      <div className="mt-4 flex justify-between">
+      <p className="mb-4 mt-1 line-clamp-2">{journalEntry.content}</p>
+      <div className="mt-auto flex justify-between ">
         <CardButton
           label="Open"
           id={journalEntry.id}
