@@ -2,12 +2,13 @@
 
 import { revalidatePath } from 'next/cache'
 import prisma from '@/utils/db'
-import { JournalEntry, User, Prisma } from '@prisma/client'
+import { JournalEntry, Prisma, MoodType } from '@prisma/client'
 
 interface EntryData {
   id: string
   title: string
   content: string
+  mood: MoodType
 }
 
 interface EntryResponse {
@@ -55,6 +56,7 @@ export async function updateEntry(
   id: string,
   title: string,
   content: string,
+  mood: MoodType,
 ): Promise<EntryResponse> {
   try {
     const updatedEntry: JournalEntry = await prisma.journalEntry.update({
@@ -67,6 +69,7 @@ export async function updateEntry(
       data: {
         title,
         content,
+        mood,
       },
     })
 
@@ -80,6 +83,7 @@ export async function updateEntry(
         id: updatedEntry.id,
         title: updatedEntry.title,
         content: updatedEntry.content,
+        mood: updatedEntry.mood,
       },
     }
   } catch (error) {
@@ -121,6 +125,7 @@ export async function deleteEntry(
         id: deletedEntry.id,
         title: deletedEntry.title,
         content: deletedEntry.content,
+        mood: deletedEntry.mood,
       },
     }
   } catch (error) {
