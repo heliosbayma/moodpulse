@@ -1,6 +1,7 @@
 import { JournalEntry } from '@prisma/client'
 import { FC } from 'react'
 import CardButton from '@/components/CardButton'
+import MoodIcon from '../MoodIcon'
 
 type JournalEntryCardProps = {
   journalEntry: JournalEntry
@@ -18,12 +19,12 @@ const JournalEntryCard: FC<JournalEntryCardProps> = ({
       className="flex w-full flex-col overflow-hidden rounded-lg bg-white px-6 py-4 shadow-lg
       hover:bg-slate-50"
     >
-      <time className="py-1 text-xs font-semibold uppercase tracking-wide text-gray-300">
-        {date}
-      </time>
-      <p className="py-1 text-xs font-semibold uppercase tracking-wide text-gray-500">
-        Mood: {journalEntry.mood}
-      </p>
+      <section className="flex justify-between">
+        <time className="py-1 text-xs font-semibold uppercase tracking-wide text-gray-300">
+          {date}
+        </time>
+        <MoodIcon mood={journalEntry.mood} />
+      </section>
       <h3 className="truncate text-lg font-semibold leading-tight">
         {journalEntry.title}
       </h3>
